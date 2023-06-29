@@ -20,10 +20,19 @@ console.log(
     "Hi there!.. This is a Quiz about the FIFA World Cup 2022..."
   )
 );
+
+//Welcoming the user
 var userName = readlineSync.question(infoTextColor("Please enter your name "));
 console.log(headingColor("Welcome", userName.toUpperCase() + "!..."));
-console.log("...............................");
-console.log("-------------------------------");
+
+//Function to print dots and dashes to give some space
+function dotsAndDashes() {
+  console.log("...............................");
+  console.log("-------------------------------");
+}
+dotsAndDashes();
+
+//Intro to level-1
 console.log(
   impInfoTextColor("The Quiz consists of three Levels - 1 , 2 and 3")
 );
@@ -35,9 +44,12 @@ console.log(
 console.log(
   impInfoTextColor("Score 13 or more points to get an extra bonus question!")
 );
-console.log("...............................");
-console.log("-------------------------------");
+dotsAndDashes();
+
 console.log(headingColor("Let's get started with Level-1 "));
+console.log(impInfoTextColor("Answer these questions in one word..."));
+
+//function to check answers
 function game(question, answer) {
   var userAnswer = readlineSync.question(question);
   if (userAnswer.toUpperCase() === answer.toUpperCase()) {
@@ -49,6 +61,7 @@ function game(question, answer) {
   }
 }
 
+//question set for level-1
 var questionSet1 = [
   {
     question: "Which country hosted the World Cup 2022? ",
@@ -76,11 +89,12 @@ var questionSet1 = [
   },
 ];
 
+//looping through level-1 questions
 for (i = 0; i < questionSet1.length; i++) {
-  questionCurrent = questionSet1[i];
   game(questionColor(questionSet1[i].question), questionSet1[i].answer);
 }
 
+//checking score and outputting score with appropriate bgColor (high=green , medium=yellow , low=red)
 if (score <= 3) {
   console.log(
     impInfoTextColor(
@@ -103,13 +117,15 @@ if (score <= 3) {
     )
   );
 }
-console.log("...............................");
-console.log("-------------------------------");
+dotsAndDashes();
 
 // Section 02
 
+//Intro to level-2
 console.log(headingColor("Level-2 : Answer in YES or NO"));
 console.log(infoTextColor("Press Y for YES , N for NO"));
+
+//function for questions where correct answer is YES
 function answerY(question) {
   if (readlineSync.keyInYN(question)) {
     console.log(rightAnswer("You're Right!"));
@@ -119,6 +135,7 @@ function answerY(question) {
   }
 }
 
+//function for questions where correct answer is NO
 function answerN(question) {
   if (readlineSync.keyInYN(question)) {
     console.log(wrongAnswer("You're Wrong!"));
@@ -128,6 +145,7 @@ function answerN(question) {
   }
 }
 
+//question set for questions whose correct answer is YES
 var questionSetY = [
   {
     question: "Enzo Fernandez won the Young Player of the tournament award ",
@@ -137,6 +155,7 @@ var questionSetY = [
   },
 ];
 
+//question set for questions whose correct answer is NO
 var questionSetN = [
   {
     question: "Messi managed to score a hat-trick in the final ",
@@ -147,11 +166,13 @@ var questionSetN = [
   },
 ];
 
+//looping through questions of level-2
 for (var i = 0; i < questionSetY.length; i++) {
   answerY(questionColor(questionSetY[i].question));
   answerN(questionColor(questionSetN[i].question));
 }
 
+//checking the total score after level-2 and consoling it with appropriate bgColor
 if (score == 10) {
   console.log(
     impInfoTextColor(
@@ -175,11 +196,13 @@ if (score == 10) {
   );
 }
 
-console.log("...............................");
-console.log("-------------------------------");
+dotsAndDashes();
 // Section 03
 
+//Intro to level-3
 console.log(headingColor("Level-3 : Select the correct answer"));
+
+//question set for level-3
 var questionSet3 = [
   {
     question: "Which keeper won the Golden Glove at this World Cup? ",
@@ -204,6 +227,7 @@ var questionSet3 = [
   },
 ];
 
+//Options for level-3 questions
 var options = [
   ["Hugo Lloris", "Emiliano Martinez", "Yassine 'Bono'", "Dominik Livakovic"],
   ["De Bruyne", "Alvarez", "Messi", "Mbappe"],
@@ -212,6 +236,7 @@ var options = [
   ["Morocco", "Croatia", "France", "Japan"],
 ];
 
+//function to ask and then check the answer of level-3 questions
 function optionsQues(options) {
   console.log(questionColor(questionSet3[i].question));
   userAnswer = readlineSync.keyInSelect(
@@ -228,10 +253,12 @@ function optionsQues(options) {
   }
 }
 
+//looping through level-3 questions
 for (var i = 0; i < questionSet3.length; i++) {
   optionsQues(options[i]);
 }
 
+//checking the total score after level-3 and consoling it with appropriate bgColor
 if (score >= 13) {
   console.log(
     impInfoTextColor("Your final score is: ", scoreHighColor(score + "/15"))
@@ -245,17 +272,19 @@ if (score >= 13) {
     impInfoTextColor("Your final score is: ", scoreMidColor(score + "/15"))
   );
 }
-console.log("...............................");
-console.log("-------------------------------");
+dotsAndDashes();
 
-// The Ultimate question ;)
+// The Special question ;)
 
+//object containing the special question
 questionSpecial = {
   question: "Who is your GOAT? ;) ",
   answer: "Messi",
 };
+//options for the special question
 var Goats = ["Messi", "Ronaldo"];
 
+//Conditional statement to decide whether user will get special question or not based on their score
 if (score >= 13) {
   console.log(
     headingColor(
@@ -265,6 +294,7 @@ if (score >= 13) {
     )
   );
   console.log(impInfoTextColor("Here's a special bonus question for you!"));
+  //asking special question
   console.log(questionColor(questionSpecial.question));
   userGoat = readlineSync.keyInSelect(
     Goats,
@@ -273,12 +303,15 @@ if (score >= 13) {
       hideEchoBack: true,
     }
   );
+
+  //checking the answer for special question (there is no right or wrong answer!)
   if (Goats[userGoat] == questionSpecial.answer) {
     console.log(impInfoTextColor("You really know ball buddy!.. "));
     console.log(headingColor("RESPECT++"));
   } else {
     console.log(impInfoTextColor("I agree to disagree (*_*) "));
   }
+  //if user did not meet the condition to get the special question
 } else {
   console.log(
     headingColor(
@@ -286,6 +319,42 @@ if (score >= 13) {
     )
   );
 }
-console.log("-------------------------------");
+dotsAndDashes();
+
+//list of highScorers with their highScores
+var highScorerList = [
+  {
+    name: "Amanjit",
+    score: 15,
+  },
+  {
+    name: "Harsh",
+    score: 14,
+  },
+];
+
+//function to print all highScores
+function highScores() {
+  console.log(infoTextColor("High Scores List:"));
+  for (var i = 0; i < highScorerList.length; i++) {
+    console.log(
+      scoreHighColor(highScorerList[i].name, "-", highScorerList[i].score)
+    );
+  }
+}
+//calling the above function
+highScores();
+
+dotsAndDashes();
+
+console.log(
+  impInfoTextColor(
+    "To get your score added to the High Scores List , send a screenshot of your score to me!.."
+  )
+);
+
+dotsAndDashes();
+
+//The Outro
 console.log(infoTextColor("Press RUN to take the Quiz again!"));
 console.log(impInfoTextColor(".......THE END......."));
