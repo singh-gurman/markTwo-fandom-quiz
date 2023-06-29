@@ -64,11 +64,12 @@ function game(question, answer) {
 //question set for level-1
 var questionSet1 = [
   {
-    question: "Which country hosted the World Cup 2022? ",
+    question: "Which country hosted the FIFA World Cup 2022? ",
     answer: "qatar",
   },
   {
-    question: "How many teams took part in this edition of the World Cup? ",
+    question:
+      "How many teams took part in this edition of the FIFA World Cup? ",
     answer: "32",
   },
   {
@@ -197,6 +198,7 @@ if (score == 10) {
 }
 
 dotsAndDashes();
+
 // Section 03
 
 //Intro to level-3
@@ -304,7 +306,9 @@ if (score >= 13) {
     }
   );
 
-  //checking the answer for special question (there is no right or wrong answer!)
+  //checking the answer for special question
+  //(there is no right or wrong answer!..)
+
   if (Goats[userGoat] == questionSpecial.answer) {
     console.log(impInfoTextColor("You really know ball buddy!.. "));
     console.log(headingColor("RESPECT++"));
